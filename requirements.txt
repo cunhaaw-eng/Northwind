@@ -1,0 +1,6 @@
+#execute pip install -r requirements.txt para instalar as libs do projeto
+
+pandas>=1.5.0 
+sqlalchemy>=2.0.0 
+dbt-postgres>=1.8.0 
+psycopg2-binary>=2.9.0
