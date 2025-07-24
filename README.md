@@ -7,12 +7,17 @@ O projeto Northwind Traders é uma solução de análise de dados desenvolvida p
 - Consolidar dados do Northwind em dimensões e fatos para análises eficientes.
 - Calcular métricas como ticket médio, taxas de churn, receita, tempo de entrega e status de estoque.
 
-#Para rodar o projeto: 
-- vá a pasta Northwind
-- em Windows: execute venv/Scripts/Activate ou em Linux source venv/bin/activate
+## Para rodar o projeto:
 
-- execute após iniciar o ambiente virtual: pip install -r requirements.txt para instalar todas as dependências utiizadas no projeto!
+1. Vá até a pasta `Northwind`.
+2. Ative o ambiente virtual:
+   - **Windows:** `venv/Scripts/Activate`
+   - **Linux:** `source venv/bin/activate`
+3. Com o ambiente ativado, instale as dependências:
+   ```bash
+   pip install -r requirements.txt
 
+ ```bash
 northwind_dbt:
 dbt run
 para ver a documentação do projeto>
@@ -20,6 +25,7 @@ dbt generate docs
 dbt docs serve
 
 para carregar o dashboard
+ ```bash
 scripts > streamlit run ./bi_northwind.py
 
 Qualquer dúvidas, enviar para: cunhaa.mcss@gmail.com
