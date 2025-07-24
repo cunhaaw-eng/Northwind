@@ -8,22 +8,22 @@ from datetime import datetime
 # Configuração da página
 st.set_page_config(page_title="Northwind Analytics Dashboard", layout="wide", initial_sidebar_state="expanded")
 
-# Estilo CSS para design clean inspirado no PowerBI
+# Estilo CSS para tema escuro mais intenso
 st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-        body { background-color: #FAFAFA; font-family: 'Roboto', sans-serif; }
+        body { background-color: #262730; font-family: 'Roboto', sans-serif; color: #F5F5F5; }
         .stTabs [data-baseweb="tab-list"] { 
             gap: 16px; 
-            background-color: #FAFAFA; 
+            background-color: #1F2A44; 
             padding: 10px; 
-            border-bottom: 2px solid #1E3A8A; 
+            border-bottom: 2px solid #4FC3F7; 
         }
         .stTabs [data-baseweb="tab"] { 
             border-radius: 10px; 
             padding: 12px 24px; 
             background-color: #1E3A8A; 
-            color: #FFFFFF; 
+            color: #F5F5F5; 
             font-weight: 700; 
             font-size: 16px;
         }
@@ -35,21 +35,28 @@ st.markdown("""
             background-color: #1E3A8A; 
             padding: 20px; 
             border-radius: 10px; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5); 
             margin-bottom: 20px; 
             text-align: center;
+            border: 1px solid #4FC3F7;
         }
-        .metric-title { font-size: 18px; color: #FFFFFF; margin-bottom: 10px; font-weight: 700; }
+        .metric-title { font-size: 18px; color: #F5F5F5; margin-bottom: 10px; font-weight: 700; }
         .metric-value { font-size: 28px; font-weight: bold; color: #4FC3F7; }
-        .plotly-chart { border-radius: 10px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .plotly-chart { 
+            border-radius: 15px; 
+            overflow: hidden; 
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5); 
+            border: 1px solid #4FC3F7; 
+        }
         .stSelectbox, .stMultiSelect, .stDateInput { 
-            background-color: #FFFFFF; 
+            background-color: #1F2A44; 
             border-radius: 8px; 
             padding: 10px; 
             margin-bottom: 10px; 
+            border: 1px solid #4FC3F7;
         }
         .stSelectbox > div > div > div, .stMultiSelect > div > div > div { 
-            font-weight: 700; color: #1F2A44; 
+            font-weight: 700; color: #F5F5F5; 
         }
         h1, h2, h3, .subtitle { color: #4FC3F7; }
     </style>
@@ -71,7 +78,7 @@ df_metrics, df_churn = get_data()
 # Filtros suspensos na sidebar
 st.sidebar.header("Filtros de Análise")
 with st.sidebar.expander("Intervalo de Datas", expanded=True):
-    date_filter = st.date_input("Selecione o intervalo", [datetime(1990, 1, 1), datetime(2025, 12, 31)])
+    date_filter = st.date_input("Selecione o intervalo", [datetime(2000, 1, 1), datetime(2025, 12, 31)])
 
 with st.sidebar.expander("Região", expanded=False):
     region_options = ['Todos'] + sorted(df_metrics['region'].unique().tolist())
@@ -160,7 +167,7 @@ with tab1:
         text_auto='.2f'
     )
     fig_ticket_trend.update_layout(
-        plot_bgcolor='#FFFFFF', paper_bgcolor='#FFFFFF', font_color='#1F2A44',
+        plot_bgcolor='#262730', paper_bgcolor='#262730', font_color='#F5F5F5',
         title_font_size=18, showlegend=True
     )
     st.plotly_chart(fig_ticket_trend, use_container_width=True)
@@ -183,7 +190,7 @@ with tab2:
         ])
         fig_revenue_country.update_layout(
             title="Receita e Ticket Médio por País", barmode='group',
-            plot_bgcolor='#FFFFFF', paper_bgcolor='#FFFFFF', font_color='#1F2A44',
+            plot_bgcolor='#262730', paper_bgcolor='#262730', font_color='#F5F5F5',
             title_font_size=18, showlegend=True,
             yaxis_title="Receita (R$)", yaxis2=dict(title="Ticket Médio (R$)", overlaying='y', side='right')
         )
@@ -193,11 +200,11 @@ with tab2:
         fig_revenue_category = px.pie(
             filtered_df.groupby('category_name')['revenue_by_category'].sum().reset_index(),
             values='revenue_by_category', names='category_name', title="Receita por Categoria",
-            color_discrete_sequence=px.colors.sequential.Blues
+            color_discrete_sequence=['#1E88E5', '#BB86FC', '#FFCA28', '#2E7D32']
         )
         fig_revenue_category.update_traces(textinfo='percent+label')
         fig_revenue_category.update_layout(
-            plot_bgcolor='#FFFFFF', paper_bgcolor='#FFFFFF', font_color='#1F2A44',
+            plot_bgcolor='#262730', paper_bgcolor='#262730', font_color='#F5F5F5',
             title_font_size=18, showlegend=True
         )
         st.plotly_chart(fig_revenue_category, use_container_width=True)
@@ -210,7 +217,7 @@ with tab2:
         text_auto='.2s'
     )
     fig_revenue_employee.update_layout(
-        plot_bgcolor='#FFFFFF', paper_bgcolor='#FFFFFF', font_color='#1F2A44',
+        plot_bgcolor='#262730', paper_bgcolor='#262730', font_color='#F5F5F5',
         title_font_size=18, showlegend=True
     )
     st.plotly_chart(fig_revenue_employee, use_container_width=True)
@@ -230,7 +237,7 @@ with tab3:
         ])
         fig_stock.update_layout(
             title="Status do Estoque", barmode='stack',
-            plot_bgcolor='#FFFFFF', paper_bgcolor='#FFFFFF', font_color='#1F2A44',
+            plot_bgcolor='#262730', paper_bgcolor='#262730', font_color='#F5F5F5',
             title_font_size=18, showlegend=True,
             yaxis_title="Quantidade"
         )
@@ -243,7 +250,7 @@ with tab3:
             color_discrete_sequence=['#1E88E5']
         )
         fig_delivery_time.update_layout(
-            plot_bgcolor='#FFFFFF', paper_bgcolor='#FFFFFF', font_color='#1F2A44',
+            plot_bgcolor='#262730', paper_bgcolor='#262730', font_color='#F5F5F5',
             title_font_size=18, showlegend=True
         )
         st.plotly_chart(fig_delivery_time, use_container_width=True)
@@ -256,7 +263,7 @@ with tab3:
         text_auto='.2f'
     )
     fig_freight_cost.update_layout(
-        plot_bgcolor='#FFFFFF', paper_bgcolor='#FFFFFF', font_color='#1F2A44',
+        plot_bgcolor='#262730', paper_bgcolor='#262730', font_color='#F5F5F5',
         title_font_size=18, showlegend=True
     )
     st.plotly_chart(fig_freight_cost, use_container_width=True)
@@ -265,10 +272,10 @@ with tab3:
     restock_table = filtered_df.groupby('region')['frequent_restock_products_by_region'].sum().reset_index()
     restock_table['frequent_restock_products_by_region'] = restock_table['frequent_restock_products_by_region'].astype(int)
     st.dataframe(restock_table.style.set_properties(**{
-        'background-color': '#FFFFFF',
-        'color': '#1F2A44',
+        'background-color': '#1F2A44',
+        'color': '#F5F5F5',
         'border-radius': '8px',
-        'border': '1px solid #1E3A8A'
+        'border': '1px solid #4FC3F7'
     }), use_container_width=True)
 
 # --- Aba 4: Clientes (Fidelização e Churn) ---
@@ -286,7 +293,7 @@ with tab4:
         )
         fig_customer_status.update_traces(textinfo='percent+label')
         fig_customer_status.update_layout(
-            plot_bgcolor='#FFFFFF', paper_bgcolor='#FFFFFF', font_color='#1F2A44',
+            plot_bgcolor='#262730', paper_bgcolor='#262730', font_color='#F5F5F5',
             title_font_size=18, showlegend=True
         )
         st.plotly_chart(fig_customer_status, use_container_width=True)
@@ -295,21 +302,25 @@ with tab4:
         fig_top_products = px.bar(
             filtered_df.groupby('product_name')['quantity_sold'].sum().reset_index().sort_values('quantity_sold', ascending=False).head(10),
             x='product_name', y='quantity_sold', title="Top 10 Produtos Mais Vendidos",
-            color='quantity_sold', color_continuous_scale=px.colors.sequential.Blues,
+            color='quantity_sold', color_continuous_scale=['#1E88E5', '#BB86FC'],
             labels={'quantity_sold': 'Quantidade Vendida', 'product_name': 'Produto'},
             text_auto=True
         )
         fig_top_products.update_layout(
-            plot_bgcolor='#FFFFFF', paper_bgcolor='#FFFFFF', font_color='#1F2A44',
+            plot_bgcolor='#262730', paper_bgcolor='#262730', font_color='#F5F5F5',
             title_font_size=18, showlegend=True
         )
         st.plotly_chart(fig_top_products, use_container_width=True)
     
     st.markdown("<h3>Tabela de Clientes Inativos por Região</h3>", unsafe_allow_html=True)
-    inactive_customers = filtered_df[filtered_df['customer_status'] == 'Inativo'][['customer_id', 'customer_name', 'region']]
+    inactive_customers = (
+        filtered_df[filtered_df['customer_status'] == 'Inativo']
+        [['customer_id', 'customer_name', 'region']]
+        .drop_duplicates()
+    )
     st.dataframe(inactive_customers.style.set_properties(**{
-        'background-color': '#FFFFFF',
-        'color': '#1F2A44',
+        'background-color': '#1F2A44',
+        'color': '#F5F5F5',
         'border-radius': '8px',
-        'border': '1px solid #1E3A8A'
+        'border': '1px solid #4FC3F7'
     }), use_container_width=True)
