@@ -1,4 +1,4 @@
-# Desafio Indicium - Northwind Traders
+# Desafio - Northwind Traders
 
 ## Visão Geral
 O projeto Northwind Traders é uma solução de análise de dados desenvolvida para fornecer insights de negócios a partir do banco de dados Northwind, utilizando modelagem dimensional. Ele utiliza **dbt** para transformação de dados, **PostgreSQL** como banco de dados e **Streamlit** para visualização. O projeto calcula métricas-chave, como ticket médio, churn de clientes, receita por região/categoria/funcionário, tempo de entrega e status de estoque, apoiando decisões estratégicas para uma empresa em crescimento.
