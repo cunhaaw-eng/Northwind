@@ -11,21 +11,32 @@ O projeto Northwind Traders é uma solução de análise de dados desenvolvida p
 
 1. Vá até a pasta `Northwind`.
 2. Ative o ambiente virtual:
-   - **Windows:** `venv/Scripts/Activate`
-   - **Linux:** `source venv/bin/activate`
+   - **Windows:**  
+     ```bash
+     venv/Scripts/Activate
+     ```
+   - **Linux:**  
+     ```bash
+     source venv/bin/activate
+     ```
 3. Com o ambiente ativado, instale as dependências:
    ```bash
-   pip install -r requirements.txt
+   pip install -r requirements.txt.
 
- ```bash
-northwind_dbt:
-dbt run
-para ver a documentação do projeto>
+## Executando o projeto `northwind_dbt`:
+   ```bash
+      dbt run
+```
+
+### Para ver a documentação do projeto:
+```bash
 dbt generate docs
 dbt docs serve
+```
 
-para carregar o dashboard
+## para carregar o dashboard
  ```bash
 scripts > streamlit run ./bi_northwind.py
+```
+### Qualquer dúvida, enviar para: [cunhaa.mcss@gmail.com](mailto:cunhaa.mcss@gmail.com)
 
-Qualquer dúvidas, enviar para: cunhaa.mcss@gmail.com
